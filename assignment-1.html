@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pranavi's Wikipedia</title>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            line-height: 1.6;
+            color: #2e2e2e;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f6f6;
+        }
+        main {
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #dfe2e5;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            cursor: pointer;
+            margin: 10px 0;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        section {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fafafa;
+            border-left: 5px solid #0056b3;
+            padding-left: 15px;
+        }
+        .toc {
+            background-color: #f9f9f9;
+            border: 1px solid #dfe2e5;
+            padding: 15px;
+            margin-bottom: 40px;
+        }
+        .toc h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: #0056b3;
+            font-weight: bold;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        .hidden {
+            display: none;
+        }
+        .toggle-icon {
+            font-size: 14px;
+            margin-left: 5px;
+        }
+        p {
+            margin: 10px 0;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul id="toc-list"></ul>
+    </div>
+    <section id="section-early-life">
+        <h1>Early Life <span class="toggle-icon">[+]</span></h1>
+        <div class="content">
+            <p>I was born on 28 Oct 2004, and I don't have that much speciality. I completed my first to tenth grade in Kendriya Vidyalaya and my intermediate in Gauthami Junior College.</p>
+        </div>
+    </section>
+
+    <section id="section-career">
+        <h1>Career <span class="toggle-icon">[+]</span></h1>
+        <div class="content hidden">
+            <section>
+                <h2>First Job <span class="toggle-icon">[+]</span></h2>
+                <div class="content hidden">
+                    <p>I did my first job as an intern at AVNL Ordnance Factory Medak, a government company. It was an exciting job, and I worked on a project involving PHP, HTML, and more.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Second Job <span class="toggle-icon">[+]</span></h2>
+                <div class="content hidden">
+                    <section>
+                        <h3>As Software Engineer <span class="toggle-icon">[+]</span></h3>
+                        <div class="content hidden">
+                            <p>Yet to develop those skills.</p>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <section id="section-latest-innovations">
+        <h1>Skill Set <span class="toggle-icon">[+]</span></h1>
+        <div class="content hidden">
+            <p>I currently know Java, Python, C++, C, SQL, and Machine Learning.</p>
+        </div>
+    </section>
+</main>
+
+<script>
+    const toggleSection = (header) => {
+        const content = header.nextElementSibling;
+        const toggleIcon = header.querySelector('.toggle-icon');
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            toggleIcon.textContent = '[-]';
+        } else {
+            content.classList.add('hidden');
+            toggleIcon.textContent = '[+]';
+        }
+    };
+    document.querySelectorAll('h1, h2, h3').forEach(header => {
+        header.addEventListener('click', () => toggleSection(header));
+    });
+    const tocList = document.getElementById('toc-list');
+    document.querySelectorAll('h1, h2, h3').forEach(header => {
+        const tagName = header.tagName.toLowerCase();
+        const sectionId = header.parentElement.id;
+        const listItem = document.createElement('li');
+        listItem.style.marginLeft = tagName === 'h2' ? '20px' : tagName === 'h3' ? '40px' : '0';
+        const link = document.createElement('a');
+        link.textContent = header.textContent.trim();
+        link.href = `#${sectionId}`;
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
+    });
+</script>
+
+</body>
+</html>
